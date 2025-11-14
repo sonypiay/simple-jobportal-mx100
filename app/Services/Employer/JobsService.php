@@ -3,7 +3,9 @@
 namespace App\Services\Employer;
 
 use App\Exceptions\NotFoundException;
-use App\Http\Resources\Jobs\JobListResource;
+use App\Http\Resources\User\Employer\Jobs\JobDetailResource;
+use App\Http\Resources\User\Employer\Jobs\JobListResource;
+use App\Repositories\AppliedJobsRepository;
 use App\Repositories\JobListingsRepository;
 use App\Repositories\JobListingsTagRepository;
 use Illuminate\Http\Request;
@@ -25,16 +27,24 @@ class JobsService
     protected JobListingsTagRepository $jobListingsTagRepository;
 
     /**
+     * @var AppliedJobsRepository
+     */
+    protected AppliedJobsRepository $appliedJobsRepository;
+
+    /**
      * @param JobListingsRepository $jobListingsRepository
      * @param JobListingsTagRepository $jobListingsTagRepository
+     * @param AppliedJobsRepository $appliedJobsRepository
      */
     public function __construct(
         JobListingsRepository $jobListingsRepository,
-        JobListingsTagRepository $jobListingsTagRepository
+        JobListingsTagRepository $jobListingsTagRepository,
+        AppliedJobsRepository $appliedJobsRepository
     )
     {
         $this->jobListingsRepository = $jobListingsRepository;
         $this->jobListingsTagRepository = $jobListingsTagRepository;
+        $this->appliedJobsRepository = $appliedJobsRepository;
     }
 
     /**
@@ -120,6 +130,8 @@ class JobsService
 
         if( ! $result ) throw new NotFoundException("Job not found");
 
-        return new JobListResource($result);
+        $result->list_candidates = $this->appliedJobsRepository->getListAppliedJobsByJobIdAndEmployerId($jobId, $userId);
+
+        return new JobDetailResource($result);
     }
 }

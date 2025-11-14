@@ -78,6 +78,14 @@ class JobsService
      */
     public function applyJob(string $userId, string $jobId, Request $request): array
     {
+        if( $this->jobListingsRepository->existsById($jobId) === false ) {
+            throw new NotFoundException("Job not found");
+        }
+
+        if( $this->appliedJobsRepository->existsByCandidateIdAndJobId($userId, $jobId) ) {
+            throw new BadRequestException("You have already applied for this job");
+        }
+
         $coverLetter = $request->file('cover_letter');
         $resume = $request->file('resume');
 

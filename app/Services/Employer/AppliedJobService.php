@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Services\Candidate;
+namespace App\Services\Employer;
 
-use App\Http\Resources\User\Candidate\AppliedJobsListResource;
 use App\Repositories\AppliedJobsRepository;
 
 class AppliedJobService
@@ -11,7 +10,7 @@ class AppliedJobService
      * @var AppliedJobsRepository
      */
     protected AppliedJobsRepository $appliedJobsRepository;
-    
+
     /**
      * @param AppliedJobsRepository $appliedJobsRepository
      */
@@ -23,16 +22,12 @@ class AppliedJobService
     /**
      * Get list applied jobs
      * 
-     * @param string $userId
-     * @return array
+     * @param string $jobId
+     * @param string $employerId
+     * @return mixed
      */
-    public function getAppliedJobs(string $userId): array
+    public function getListAppliedJobs(string $jobId, string $employerId): mixed
     {
-        $result = $this->appliedJobsRepository->getAppliedJobsByCandidateUser($userId);
-
-        return [
-            'total' => $result->count(),
-            'data' => AppliedJobsListResource::collection($result),
-        ];
+        return $this->appliedJobsRepository->getListAppliedJobsByJobIdAndEmployerId($jobId, $employerId);
     }
 }

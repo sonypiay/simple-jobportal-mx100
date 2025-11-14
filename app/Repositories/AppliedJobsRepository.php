@@ -53,6 +53,8 @@ class AppliedJobsRepository
             ->select([
                 'applied_jobs.id AS applied_job_id',
                 'applied_jobs.status',
+                'applied_jobs.created_at',
+                'applied_jobs.updated_at',
                 'job_listings.id AS job_id',
                 'job_listings.title AS job_title',
                 'job_listings.employment_type',
@@ -61,11 +63,102 @@ class AppliedJobsRepository
                 'job_categories.name AS category',
                 'user_employer.name AS company_name',
             ])
-            ->where('applied_jobs.user_candidate_id', $userId)
             ->join('job_listings', 'applied_jobs.job_id', '=', 'job_listings.id')
             ->join('user_employer', 'job_listings.user_employer_id', '=', 'user_employer.id')
             ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
+            ->where('applied_jobs.user_candidate_id', $userId)
             ->orderBy('applied_jobs.created_at', 'desc')
             ->get();
+    }
+
+    /**
+     * Get list applied jobs by employer id
+     * 
+     * @param string $employerId
+     * @return Collection
+     */
+    public function getListAppliedJobsByEmployerId(string $employerId): Collection
+    {
+        return $this->model
+            ->select([
+                'applied_jobs.id AS applied_job_id',
+                'applied_jobs.status',
+                'applied_jobs.created_at AS applied_date',
+                'applied_jobs.updated_at AS last_updated',
+                'job_listings.id AS job_id',
+                'job_listings.title AS job_title',
+                'job_listings.employment_type',
+                'job_listings.level_experience',
+                'job_listings.location',
+                'user_employer.name AS company_name',
+                'user_candidate.id AS candidate_id',
+                'user_candidate.name AS candidate_name',
+                'user_candidate.email AS candidate_email',
+                'user_candidate.phone AS candidate_phone',
+                'job_categories.name AS category',
+            ])
+            ->join('job_listings', 'applied_jobs.job_id', '=', 'job_listings.id')
+            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
+            ->leftJoin('user_candidate', 'applied_jobs.user_candidate_id', '=', 'user_candidate.id')
+            ->where('job_listings.user_employer_id', $employerId)
+            ->orderBy('applied_jobs.created_at', 'desc')
+            ->get();
+    }
+
+    /**
+     * Get list applied jobs by job id and employer id
+     * 
+     * @param string $jobId
+     * @param string $employerId
+     * @return Collection
+     */
+    public function getListAppliedJobsByJobIdAndEmployerId(string $jobId, string $employerId): Collection
+    {
+        return $this->model
+            ->select([
+                'applied_jobs.id AS applied_job_id',
+                'applied_jobs.status',
+                'applied_jobs.created_at AS applied_date',
+                'applied_jobs.updated_at AS last_updated',
+                'applied_jobs.cover_letter',
+                'applied_jobs.resume',
+                'job_listings.id AS job_id',
+                'job_listings.title AS job_title',
+                'job_listings.employment_type',
+                'job_listings.level_experience',
+                'job_listings.location',
+                'user_employer.name AS company_name',
+                'user_candidate.id AS candidate_id',
+                'user_candidate.name AS candidate_name',
+                'user_candidate.email AS candidate_email',
+                'user_candidate.phone AS candidate_phone',
+                'job_categories.name AS category',
+            ])
+            ->join('user_candidate', 'applied_jobs.user_candidate_id', '=', 'user_candidate.id')
+            ->join('job_listings', 'applied_jobs.job_id', '=', 'job_listings.id')
+            ->join('user_employer', 'job_listings.user_employer_id', '=', 'user_employer.id')
+            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
+            ->where([
+                ['applied_jobs.job_id', $jobId],
+                ['job_listings.user_employer_id', $employerId]
+            ])
+            ->orderBy('applied_jobs.created_at', 'desc')
+            ->get();
+    }
+
+    /**
+     * Check if candidate already applied
+     * 
+     * @param string $candidateId
+     * @param string $jobId
+     */
+    public function existsByCandidateIdAndJobId(string $candidateId, string $jobId): bool
+    {
+        return $this->model->select('id')
+            ->where([
+                ['user_candidate_id', $candidateId],
+                ['job_id', $jobId]
+            ])
+            ->exists();
     }
 }

@@ -53,9 +53,13 @@ class JobListingsRepository
                 'job_listings.updated_at',
                 'user_employer.name AS company_name',
             ])
-            ->when($title, fn($query) => $query->where('job_listings.title', 'LIKE', '%' . $title . '%'))
+            ->addSelect([
+                'total_applied_jobs' => AppliedJobs::selectRaw('COUNT(applied_jobs.id)')
+                    ->whereColumn('applied_jobs.job_id', 'job_listings.id')
+            ])
             ->join('user_employer', 'job_listings.user_employer_id', '=', 'user_employer.id')
             ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
+            ->when($title, fn($query) => $query->where('job_listings.title', 'LIKE', '%' . $title . '%'))
             ->get();
     }
 
@@ -84,9 +88,9 @@ class JobListingsRepository
                 'total_applied_jobs' => AppliedJobs::selectRaw('COUNT(applied_jobs.id)')
                     ->whereColumn('applied_jobs.job_id', 'job_listings.id')
             ])
+            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
             ->where('job_listings.user_employer_id', $userId)
             ->when($title, fn($query) => $query->where('job_listings.title', 'LIKE', '%' . $title . '%'))
-            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
             ->get();
     }
 
@@ -119,9 +123,9 @@ class JobListingsRepository
                 'total_applied_jobs' => AppliedJobs::selectRaw('COUNT(applied_jobs.id)')
                     ->whereColumn('applied_jobs.job_id', 'job_listings.id')
             ])
+            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
             ->where('job_listings.user_employer_id', $userId)
             ->where('job_listings.id', $jobId)
-            ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
             ->first();
     }
 
@@ -154,9 +158,20 @@ class JobListingsRepository
                 'total_applied_jobs' => AppliedJobs::selectRaw('COUNT(applied_jobs.id)')
                     ->whereColumn('applied_jobs.job_id', 'job_listings.id')
             ])
-            ->where('job_listings.id', $jobId)
             ->join('user_employer', 'job_listings.user_employer_id', '=', 'user_employer.id')
             ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
+            ->where('job_listings.id', $jobId)
             ->first();
+    }
+
+    /**
+     * Check if job is exist
+     * 
+     * @param string $jobId
+     * @return bool
+     */
+    public function existsById(string $jobId): bool
+    {
+        return $this->model->select('id')->where('id', $jobId)->exists();
     }
 }
