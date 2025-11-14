@@ -5,15 +5,16 @@ namespace App\Http\Requests\User\Employer;
 use App\Exceptions\BadRequestException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class RegisterRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -26,13 +27,12 @@ class RegisterRequest extends FormRequest
         return [
             'fullname' => ['required','string','max:255'],
             'email' => ['required', 'string', 'email:rfc', 'max:255'],
-            'password' => ['required', 'string', 'min:3'],
             'address' => ['required', 'string'],
             'description' => ['required', 'string'],
         ];
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
             'fullname.required' => 'Fullname is required',
@@ -42,9 +42,6 @@ class RegisterRequest extends FormRequest
             'email.string' => 'Email must be a string',
             'email.email' => 'Email must be a valid email address',
             'email.max' => 'Email must be less than 255 characters',
-            'password.required' => 'Password is required',
-            'password.string' => 'Password must be a string',
-            'password.min' => 'Password must be at least 3 characters',
             'address.required' => 'Address is required',
             'address.string' => 'Address must be a string',
             'description.required' => 'Description is required',

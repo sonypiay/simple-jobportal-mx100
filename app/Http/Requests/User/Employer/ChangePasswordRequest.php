@@ -5,15 +5,16 @@ namespace App\Http\Requests\User\Employer;
 use App\Exceptions\BadRequestException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class RegisterRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -24,31 +25,21 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fullname' => ['required','string','max:255'],
-            'email' => ['required', 'string', 'email:rfc', 'max:255'],
             'password' => ['required', 'string', 'min:3'],
-            'address' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'confirm_password' => ['required', 'string', 'min:3', 'same:password'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'fullname.required' => 'Fullname is required',
-            'fullname.string' => 'Fullname must be a string',
-            'fullname.max' => 'Fullname must be less than 255 characters',
-            'email.required' => 'Email is required',
-            'email.string' => 'Email must be a string',
-            'email.email' => 'Email must be a valid email address',
-            'email.max' => 'Email must be less than 255 characters',
             'password.required' => 'Password is required',
             'password.string' => 'Password must be a string',
             'password.min' => 'Password must be at least 3 characters',
-            'address.required' => 'Address is required',
-            'address.string' => 'Address must be a string',
-            'description.required' => 'Description is required',
-            'description.string' => 'Description must be a string',
+            'confirm_password.required' => 'Confirm password is required',
+            'confirm_password.string' => 'Confirm password must be a string',
+            'confirm_password.min' => 'Confirm password must be at least 3 characters',
+            'confirm_password.same' => 'Confirm password must be same as password',
         ];
     }
 

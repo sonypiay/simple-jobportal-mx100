@@ -45,11 +45,16 @@ class UserEmployerRepository
      * Check if email exists
      * 
      * @param string $email
+     * @param ?string $userId
      * @return bool
      */
-    public function checkEmailExists(string $email): bool
+    public function checkEmailExists(string $email, ?string $userId = null): bool
     {
-        return $this->model->select('email')->where('email', $email)->exists();
+        return $this->model
+            ->select('email')
+            ->where('email', $email)
+            ->when($userId, fn($query) => $query->where('id', '!=', $userId))
+            ->exists();
     }
 
     /**
@@ -60,6 +65,31 @@ class UserEmployerRepository
      */
     public function findByUserId(string $userId): ?UserEmployer
     {
-        return $this->model->where('user_id', $userId)->first();
+        return $this->model->where('id', $userId)->first();
+    }
+
+    /**
+     * Update profile
+     * 
+     * @param string $userId
+     * @param array $data
+     * @return void
+     */
+    public function updateProfile(string $userId, array $data): void
+    {
+        $this->model->where('id', $userId)->update($data);
+    }
+
+    /**
+     * Change password
+     * 
+     * @param string $userId
+     * @param string $password
+     * 
+     * @return void
+     */
+    public function changePassword(string $userId, string $password): void
+    {
+        $this->model->where('id', $userId)->update(['password' => $password]);
     }
 }

@@ -30,6 +30,22 @@ class RegisterRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'fullname.required' => 'fullname is required',
+            'fullname.string' => 'fullname must be string',
+            'fullname.max' => 'fullname max length is 255',
+            'email.required' => 'email is required',
+            'email.string' => 'email must be string',
+            'email.email' => 'email must be valid email',
+            'email.max' => 'email max length is 255',
+            'password.required' => 'password is required',
+            'password.string' => 'password must be string',
+            'password.min' => 'password min length is 3',
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new BadRequestException($validator->errors()->first());
