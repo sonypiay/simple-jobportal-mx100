@@ -31,9 +31,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone');
-            $table->string('address');
-            $table->text('description');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
