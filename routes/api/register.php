@@ -6,11 +6,10 @@
  * Description: Register User
  */
 
-use App\Http\Controllers\UserCandidateController;
-use App\Http\Controllers\UserEmployerController;
+use App\Http\Controllers\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('register')->name('register.')->group(function() {
-    Route::post('/candidate', [UserCandidateController::class, 'register'])->name('candidate');
-    Route::post('/employer', [UserEmployerController::class, 'register'])->name('employer');
+    Route::post('/candidate', [RegisterUserController::class, 'registerAsCandidate'])->name('candidate');
+    Route::post('/employer', [RegisterUserController::class, 'registerAsEmployer'])->name('employer');
 });
