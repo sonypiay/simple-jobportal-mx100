@@ -19,6 +19,8 @@ Route::prefix('employer')->name('employer.')->group(function() {
     Route::prefix('jobs')->name('jobs.')->group(function() {
         Route::get('/', [JobController::class, 'getListJob'])->name('list');
         Route::post('create', [JobController::class, 'create'])->name('create');
+        Route::put('{id}/update', [JobController::class, 'updateJob'])->name('update');
+        Route::patch('{id}/update-status', [JobController::class, 'updateStatusJob'])->name('update-status');
         Route::get('{id}', [JobController::class, 'getJobDetail'])->name('detail');
     });
 });
