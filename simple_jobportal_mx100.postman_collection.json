@@ -1,0 +1,3637 @@
+{
+	"info": {
+		"_postman_id": "ad478859-f85b-4b32-a36b-681369835aeb",
+		"name": "Simple Jobportal MX100",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4183836"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login as Candidate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const status = pm.response.code;\r",
+									"const json = pm.response.json();\r",
+									"\r",
+									"if( status === 200 ) {\r",
+									"    pm.environment.set(\"candidate_token\", json.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nam.dosan@example.com\",\r\n    \"password\": \"testing123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login/candidate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"candidate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nam.dosan@example.com\",\r\n    \"password\": \"testing123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login/candidate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"candidate"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:31:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user_id\": \"019a82ce-4f24-72bf-8cb7-9db99ccb41f4\",\n    \"user_type\": \"candidate\",\n    \"token\": \"q6DNtdOLlwx5t4gYZSbSsHjYvIIQbkodw2g3tnZ2IAVJJiUbZhmsuqVZnHdlfnQPK1POJyd4LTp5TWZ9soalz1sFmopoH6j37CPZCrdIjDqSPf4EMMsBhMmYEJwnaHeq\"\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nam.dosan@example.com\",\r\n    \"password\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login/candidate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"candidate"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:32:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid email or password\",\n    \"exception\": {\n        \"message\": \"Invalid email or password\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\AuthService.php\",\n        \"line\": 67,\n        \"code\": 401,\n        \"url\": \"http://localhost:8000/api/auth/login/candidate\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login as Employer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const status = pm.response.code;\r",
+									"const json = pm.response.json();\r",
+									"\r",
+									"if( status === 200 ) {\r",
+									"    pm.environment.set(\"employer_token\", json.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"injae.company@example.com\",\r\n    \"password\": \"testing123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login/employer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"employer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"injae.company@example.com\",\r\n    \"password\": \"testing123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login/employer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"employer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:32:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user_id\": \"019a82d1-a17b-72e1-946d-c329faaf15f0\",\n    \"user_type\": \"employer\",\n    \"token\": \"KAdiJNp8OVu0ANTmb9j5hpqZjM34V4Zr6w27Z72IznhXvwlOt0M7E9ZOUlZVqb8a1Tnco8MVoO96UJ4pn9g3gccHKWagVqkogNBVgWTUgvrE5UEsjEl9kdRAPdtIYF8j\"\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"injae.company@example.com\",\r\n    \"password\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login/employer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"employer"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:33:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid email or password\",\n    \"exception\": {\n        \"message\": \"Invalid email or password\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\AuthService.php\",\n        \"line\": 67,\n        \"code\": 401,\n        \"url\": \"http://localhost:8000/api/auth/login/employer\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout as Candidate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{candidate_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:33:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully logged out\"\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:33:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated\",\n    \"exception\": {\n        \"message\": \"Unauthenticated\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\AuthService.php\",\n        \"line\": 92,\n        \"code\": 401,\n        \"url\": \"http://localhost:8000/api/auth/logout\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout as Employer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{employer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:33:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully logged out\"\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:34:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated\",\n    \"exception\": {\n        \"message\": \"Unauthenticated\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\AuthService.php\",\n        \"line\": 92,\n        \"code\": 401,\n        \"url\": \"http://localhost:8000/api/auth/logout\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Candidate",
+					"item": [
+						{
+							"name": "Jobs",
+							"item": [
+								{
+									"name": "Applied Jobs",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{candidate_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/candidate/jobs/applied",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"jobs",
+												"applied"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/candidate/jobs/applied",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"candidate",
+														"jobs",
+														"applied"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:35:05 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"total\": 1,\n    \"data\": [\n        {\n            \"apply_id\": \"019a838c-46ce-70ae-bf94-f6f7aa04017b\",\n            \"job_detail\": {\n                \"id\": \"019a8317-aadc-7012-9abb-cffd17dadf97\",\n                \"title\": \"Backend Developer\",\n                \"location\": \"Jakarta\",\n                \"employment_type\": \"Full Time\",\n                \"level_experience\": \"1 - 3 years\",\n                \"company_name\": \"Injae Company\",\n                \"category\": \"Teknologi Informasi dan Komunikasi\",\n                \"status\": \"pending\"\n            },\n            \"apply_date\": \"2025-11-14 18:06:39\"\n        }\n    ]\n}"
+										},
+										{
+											"name": "Response Failed",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/candidate/jobs/applied",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"candidate",
+														"jobs",
+														"applied"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:35:31 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidate_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/users/candidate/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"candidate",
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/candidate/profile",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:35:48 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"019a82ce-4f24-72bf-8cb7-9db99ccb41f4\",\n    \"name\": \"Nam Do San\",\n    \"email\": \"nam.dosan@example.com\",\n    \"phone\": \"085981733\",\n    \"address\": \"Korea Selatan\",\n    \"description\": \"Software Engineer\",\n    \"date_register\": \"2025-11-14 14:39:10\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/candidate/profile",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:36:11 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidate_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Nam Do San\",\r\n    \"email\": \"nam.dosan@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Software Engineer\",\r\n    \"phone\": \"085981733\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/users/candidate/profile/update",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"candidate",
+										"profile",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Nam Do San\",\r\n    \"email\": \"nam.dosan@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Software Engineer\",\r\n    \"phone\": \"085981733\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/candidate/profile/update",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile",
+												"update"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:36:50 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Profile updated successfully\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Nam Do San\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Software Engineer\",\r\n    \"phone\": \"085981733\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/candidate/profile/update",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile",
+												"update"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:37:33 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Email john.doe@example.com sudah terdaftar\",\n    \"exception\": {\n        \"message\": \"Email john.doe@example.com sudah terdaftar\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\Candidate\\\\UserService.php\",\n        \"line\": 57,\n        \"code\": 409,\n        \"url\": \"http://localhost:8000/api/users/candidate/profile/update\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidate_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"testing123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/users/candidate/profile/change-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"candidate",
+										"profile",
+										"change-password"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"testing123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/candidate/profile/change-password",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile",
+												"change-password"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:38:15 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Password changed successfully\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/candidate/profile/change-password",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"candidate",
+												"profile",
+												"change-password"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:38:26 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Confirm password must be same as password\",\n    \"exception\": {\n        \"message\": \"Confirm password must be same as password\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Http\\\\Requests\\\\User\\\\Candidate\\\\ChangePasswordRequest.php\",\n        \"line\": 48,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/users/candidate/profile/change-password\"\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Employer",
+					"item": [
+						{
+							"name": "Jobs",
+							"item": [
+								{
+									"name": "Post a Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{employer_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Fullstack Developer\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 15000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/jobs/create",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"jobs",
+												"create"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"title\": \"Fullstack Developer\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 15000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/create",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"create"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:40:35 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Job successfully posted\",\n    \"data\": {\n        \"id\": \"019a889a-c063-7279-96d0-143493e9a3b7\",\n        \"title\": \"Fullstack Developer\",\n        \"tags\": [\n            \"node.js\",\n            \"reactjs\",\n            \"vuejs\",\n            \"javascript\",\n            \"html\",\n            \"css\",\n            \"sass\",\n            \"mobile apps\",\n            \"dbms\"\n        ]\n    }\n}"
+										},
+										{
+											"name": "Response Failed",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 15000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/create",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"create"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:45:50 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Title is required\",\n    \"exception\": {\n        \"message\": \"Title is required\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Http\\\\Requests\\\\User\\\\Employer\\\\PostJobRequest.php\",\n        \"line\": 55,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/users/employer/jobs/create\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "List Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{employer_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/employer/jobs?title=",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"jobs"
+											],
+											"query": [
+												{
+													"key": "title",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/employer/jobs?title=",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs"
+													],
+													"query": [
+														{
+															"key": "title",
+															"value": ""
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:46:25 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"data\": [\n        {\n            \"id\": \"019a8317-aadc-7012-9abb-cffd17dadf97\",\n            \"title\": \"Backend Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 3 years\",\n            \"last_updated\": \"2025-11-14 15:59:17\",\n            \"total_applied\": 1\n        },\n        {\n            \"id\": \"019a833d-1dc3-7164-898f-1524997885c3\",\n            \"title\": \"Frontend Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 2 years\",\n            \"last_updated\": \"2025-11-14 16:40:11\",\n            \"total_applied\": 0\n        },\n        {\n            \"id\": \"019a889a-c063-7279-96d0-143493e9a3b7\",\n            \"title\": \"Fullstack Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 4 years\",\n            \"last_updated\": \"2025-11-15 17:40:34\",\n            \"total_applied\": 0\n        }\n    ],\n    \"total\": 3\n}"
+										},
+										{
+											"name": "Response Failed",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/employer/jobs?title=",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs"
+													],
+													"query": [
+														{
+															"key": "title",
+															"value": ""
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:46:50 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get Detail Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{employer_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"jobs",
+												"019a8317-aadc-7012-9abb-cffd17dadf97"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:47:15 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": \"019a8317-aadc-7012-9abb-cffd17dadf97\",\n    \"title\": \"Backend Developer\",\n    \"category\": \"Teknologi Informasi dan Komunikasi\",\n    \"is_publish\": true,\n    \"location\": \"Jakarta\",\n    \"employment_type\": \"Full Time\",\n    \"level_experience\": \"1 - 3 years\",\n    \"last_updated\": \"2025-11-14 15:59:17\",\n    \"description\": \"You are focus on build REST API for backend systems\",\n    \"qualifications\": \"Familiar with PHP, Node.js or Golang\",\n    \"salary\": {\n        \"min\": 7000000,\n        \"max\": 10000000\n    },\n    \"company\": null,\n    \"total_applied\": 1,\n    \"list_candidates\": [\n        {\n            \"candidate_id\": \"019a82ce-4f24-72bf-8cb7-9db99ccb41f4\",\n            \"candidate_name\": \"Nam Do San - EDITED\",\n            \"candidate_email\": \"nam.dosan@example.com\",\n            \"candidate_phone\": \"085981733\",\n            \"apply_id\": \"019a838c-46ce-70ae-bf94-f6f7aa04017b\",\n            \"status\": \"pending\",\n            \"apply_date\": \"2025-11-14 18:06:39\",\n            \"cover_letter\": \"http://localhost:8000/storage/apply_job/cover_letter/eu2HnTOtc1SDbmYKi6csVxpxFM9oyvyI9ZXTMorJ.pdf\",\n            \"resume\": \"http://localhost:8000/storage/apply_job/resume/1rWUev97FurYxzt7bUOTybCW4NJUrIddljoR8wr6.pdf\"\n        }\n    ]\n}"
+										},
+										{
+											"name": "Response Failed",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 17:47:38 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update Status Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{employer_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"status\": \"draft\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update-status",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"jobs",
+												"019a8317-aadc-7012-9abb-cffd17dadf97",
+												"update-status"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success - Publish",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"status\": \"publish\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update-status",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97",
+														"update-status"
+													]
+												}
+											},
+											"status": "Accepted",
+											"code": 202,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 18:33:01 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Job status successfully updated\"\n}"
+										},
+										{
+											"name": "Response Success - Draft",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"status\": \"draft\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update-status",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97",
+														"update-status"
+													]
+												}
+											},
+											"status": "Accepted",
+											"code": 202,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 18:33:23 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Job status successfully updated\"\n}"
+										},
+										{
+											"name": "Response Failed",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"status\": \"test\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update-status",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97",
+														"update-status"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 18:33:46 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Status must be publish or draft\",\n    \"exception\": {\n        \"message\": \"Status must be publish or draft\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\Employer\\\\JobsService.php\",\n        \"line\": 155,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update-status\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "Update Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{employer_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Fullstack Developer\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 12000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"jobs",
+												"019a8317-aadc-7012-9abb-cffd17dadf97",
+												"update"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Response Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"title\": \"Fullstack Developer\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 12000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97",
+														"update"
+													]
+												}
+											},
+											"status": "Accepted",
+											"code": 202,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 19:00:01 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Job successfully updated\"\n}"
+										},
+										{
+											"name": "Response Failed - Invalid Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 12000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-cffd17dadf97",
+														"update"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 19:02:52 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Title is required\",\n    \"exception\": {\n        \"message\": \"Title is required\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Http\\\\Requests\\\\User\\\\Employer\\\\PostJobRequest.php\",\n        \"line\": 62,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/users/employer/jobs/019a8317-aadc-7012-9abb-cffd17dadf97/update\"\n    }\n}"
+										},
+										{
+											"name": "Response Failed - Not Found",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "X-Requested-With",
+														"value": "XMLHttpRequest",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"title\": \"Fullstack Developer\",\r\n    \"description\": \"You are focus on build Mobile Apps and Backend Development\",\r\n    \"qualification\": \"Familiar with React.js, Vue.js, Flutter\",\r\n    \"location\": \"Jakarta\",\r\n    \"employment_type\": \"Full Time\",\r\n    \"level_experience\": \"1 - 4 years\",\r\n    \"minimum_salary\": 10000000,\r\n    \"maximum_salary\": 12000000,\r\n    \"category\": \"e951b264-b7b0-4880-8647-e72fc720c926\",\r\n    \"tags\": [\"node.js\", \"reactjs\", \"vuejs\", \"javascript\", \"html\", \"css\", \"sass\", \"mobile apps\", \"dbms\"]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}/users/employer/jobs/019a8317-aadc-7012-9abb-/update",
+													"host": [
+														"{{url}}"
+													],
+													"path": [
+														"users",
+														"employer",
+														"jobs",
+														"019a8317-aadc-7012-9abb-",
+														"update"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Host",
+													"value": "localhost:8000"
+												},
+												{
+													"key": "Connection",
+													"value": "close"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 15 Nov 2025 19:03:20 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Job not found\",\n    \"exception\": {\n        \"message\": \"Job not found\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\Employer\\\\JobsService.php\",\n        \"line\": 113,\n        \"code\": 404,\n        \"url\": \"http://localhost:8000/api/users/employer/jobs/019a8317-aadc-7012-9abb-/update\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Update Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Injae Company\",\r\n    \"email\": \"injae.company@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Perusahaan Artificial Intelligence di Korea\",\r\n    \"company_size\": \"< 10\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Software Development, Artificial Intelligence, Image Recognition\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/users/employer/profile/update",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"employer",
+										"profile",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Injae Company\",\r\n    \"email\": \"injae.company@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Perusahaan Artificial Intelligence di Korea\",\r\n    \"company_size\": \"< 10\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Software Development, Artificial Intelligence, Image Recognition\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/profile/update",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile",
+												"update"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:48:09 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Profile updated successfully\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Injae Company\",\r\n    \"email\": \"injae.company@example.com\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Perusahaan Artificial Intelligence di Korea\",\r\n    \"company_size\": \"< 10\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Software Development, Artificial Intelligence, Image Recognition\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/profile/update",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile",
+												"update"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:48:23 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/users/employer/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"employer",
+										"profile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/employer/profile",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:48:41 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"019a82d1-a17b-72e1-946d-c329faaf15f0\",\n    \"name\": \"Injae Company\",\n    \"email\": \"injae.company@example.com\",\n    \"address\": \"Korea Selatan\",\n    \"description\": \"Perusahaan Artificial Intelligence di Korea\",\n    \"website\": \"https://www.example.com\",\n    \"company_size\": \"< 10\",\n    \"specialization\": \"Software Development, Artificial Intelligence, Image Recognition\",\n    \"industry\": null,\n    \"is_active\": true,\n    \"date_register\": \"2025-11-14 14:42:47\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/users/employer/profile",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:48:55 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"testing123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/users/employer/profile/change-password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"employer",
+										"profile",
+										"change-password"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"testing123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/profile/change-password",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile",
+												"change-password"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:49:11 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Password changed successfully\"\n}"
+								},
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"password\": \"testing123\",\r\n    \"confirm_password\": \"123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/users/employer/profile/change-password",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"users",
+												"employer",
+												"profile",
+												"change-password"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:49:21 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Confirm password must be same as password\",\n    \"exception\": {\n        \"message\": \"Confirm password must be same as password\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Http\\\\Requests\\\\User\\\\Employer\\\\ChangePasswordRequest.php\",\n        \"line\": 48,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/users/employer/profile/change-password\"\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Registration",
+					"item": [
+						{
+							"name": "Register as Candidate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Jane Doe\",\r\n    \"email\": \"jane.doe@example.com\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/register/candidate",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"register",
+										"candidate"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"John Doe\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"12345678\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/register/candidate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"register",
+												"candidate"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:49:56 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Email john.doe@example.com sudah terdaftar\",\n    \"exception\": {\n        \"message\": \"Email john.doe@example.com sudah terdaftar\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\RegisterUserService.php\",\n        \"line\": 54,\n        \"code\": 409,\n        \"url\": \"http://localhost:8000/api/register/candidate\"\n    }\n}"
+								},
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Jane Doe\",\r\n    \"email\": \"jane.doe@example.com\",\r\n    \"password\": \"12345678\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/register/candidate",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"register",
+												"candidate"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:50:22 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"User candidate registered successfully.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Register as Employer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Kino Indonesia\",\r\n    \"email\": \"kino.indonesia@example.com\",\r\n    \"password\": \"12345678\",\r\n    \"address\": \"Indonesia\",\r\n    \"description\": \"Perusahaan bidang Food Manufacture Commercial Goods\",\r\n    \"company_size\": \"> 1000\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Makanan, Minuman, Sabun dan lain lain.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/register/employer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"register",
+										"employer"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Response Failed",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Samsan Tech\",\r\n    \"email\": \"samsan.tech@example.com\",\r\n    \"password\": \"12345678\",\r\n    \"address\": \"Korea Selatan\",\r\n    \"description\": \"Perusahaan Artificial Intelligence di Korea\",\r\n    \"company_size\": \"< 10\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Software Development, Artificial Intelligence, Image Recognition\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/register/employer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"register",
+												"employer"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:51:20 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Email samsan.tech@example.com sudah terdaftar\",\n    \"exception\": {\n        \"message\": \"Email samsan.tech@example.com sudah terdaftar\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\RegisterUserService.php\",\n        \"line\": 90,\n        \"code\": 409,\n        \"url\": \"http://localhost:8000/api/register/employer\"\n    }\n}"
+								},
+								{
+									"name": "Response Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Requested-With",
+												"value": "XMLHttpRequest",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fullname\": \"Kino Indonesia\",\r\n    \"email\": \"kino.indonesia@example.com\",\r\n    \"password\": \"12345678\",\r\n    \"address\": \"Indonesia\",\r\n    \"description\": \"Perusahaan bidang Food Manufacture Commercial Goods\",\r\n    \"company_size\": \"> 1000\",\r\n    \"website\": \"https://www.example.com\",\r\n    \"specialization\": \"Makanan, Minuman, Sabun dan lain lain.\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/register/employer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"register",
+												"employer"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 15 Nov 2025 17:56:04 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"User employer registered successfully.\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Get Detail Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{candidate_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/jobs/019a8317-aadc-7012-9abb-cffd17dadf97",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"jobs",
+								"019a8317-aadc-7012-9abb-cffd17dadf97"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/jobs/019a8317-aadc-7012-9abb-cffd17dadf97",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs",
+										"019a8317-aadc-7012-9abb-cffd17dadf97"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:56:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"019a8317-aadc-7012-9abb-cffd17dadf97\",\n    \"title\": \"Backend Developer\",\n    \"category\": \"Teknologi Informasi dan Komunikasi\",\n    \"is_publish\": true,\n    \"location\": \"Jakarta\",\n    \"employment_type\": \"Full Time\",\n    \"level_experience\": \"1 - 3 years\",\n    \"last_updated\": \"2025-11-14 15:59:17\",\n    \"description\": \"You are focus on build REST API for backend systems\",\n    \"qualifications\": \"Familiar with PHP, Node.js or Golang\",\n    \"salary\": {\n        \"min\": 7000000,\n        \"max\": 10000000\n    },\n    \"company\": \"Injae Company\",\n    \"total_applied\": 1\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/jobs/019a8317-aadc-7012-9abb-test",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs",
+										"019a8317-aadc-7012-9abb-test"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:57:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Job not found\",\n    \"exception\": {\n        \"message\": \"Job not found\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\JobsService.php\",\n        \"line\": 65,\n        \"code\": 404,\n        \"url\": \"http://localhost:8000/api/jobs/019a8317-aadc-7012-9abb-test\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Jobs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{candidate_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/jobs?title=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "",
+									"description": "search jobs by title"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/jobs?title=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "",
+											"description": "search jobs by title"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:57:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 3,\n    \"data\": [\n        {\n            \"id\": \"019a889a-c063-7279-96d0-143493e9a3b7\",\n            \"title\": \"Fullstack Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 4 years\",\n            \"last_updated\": \"2025-11-15 17:40:34\",\n            \"total_applied\": 0\n        },\n        {\n            \"id\": \"019a833d-1dc3-7164-898f-1524997885c3\",\n            \"title\": \"Frontend Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 2 years\",\n            \"last_updated\": \"2025-11-14 16:40:11\",\n            \"total_applied\": 0\n        },\n        {\n            \"id\": \"019a8317-aadc-7012-9abb-cffd17dadf97\",\n            \"title\": \"Backend Developer\",\n            \"category\": \"Teknologi Informasi dan Komunikasi\",\n            \"is_publish\": true,\n            \"location\": \"Jakarta\",\n            \"employment_type\": \"Full Time\",\n            \"level_experience\": \"1 - 3 years\",\n            \"last_updated\": \"2025-11-14 15:59:17\",\n            \"total_applied\": 1\n        }\n    ]\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/jobs?title=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "",
+											"description": "search jobs by title"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 17:58:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Apply Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{candidate_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cover_letter",
+									"type": "file",
+									"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_1000VUs.pdf"
+								},
+								{
+									"key": "resume",
+									"type": "file",
+									"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_200VUS.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/jobs/019a889a-c063-7279-96d0-143493e9a3b7/apply",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"jobs",
+								"019a889a-c063-7279-96d0-143493e9a3b7",
+								"apply"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cover_letter",
+											"type": "file",
+											"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_1000VUs.pdf"
+										},
+										{
+											"key": "resume",
+											"type": "file",
+											"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_200VUS.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/jobs/019a889a-c063-7279-96d0-143493e9a3b7/apply",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs",
+										"019a889a-c063-7279-96d0-143493e9a3b7",
+										"apply"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 18:00:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Apply job success!\",\n    \"data\": {\n        \"apply_id\": \"019a88ac-95d8-7156-80e2-46fb13133d30\",\n        \"job_id\": \"019a889a-c063-7279-96d0-143493e9a3b7\"\n    }\n}"
+						},
+						{
+							"name": "Response Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cover_letter",
+											"type": "file",
+											"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_1000VUs.pdf"
+										},
+										{
+											"key": "resume",
+											"type": "file",
+											"src": "/C:/Users/pysch/Downloads/DaikinTraining_Report_Performance_Test_API_EvaluationTest_200VUS.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/jobs/019a889a-c063-7279-96d0-143493e9a3b7/apply",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"jobs",
+										"019a889a-c063-7279-96d0-143493e9a3b7",
+										"apply"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 15 Nov 2025 18:00:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You have already applied for this job\",\n    \"exception\": {\n        \"message\": \"You have already applied for this job\",\n        \"path\": \"D:\\\\Projects\\\\Laravel\\\\SimpleJobportalMX100\\\\app\\\\Services\\\\JobsService.php\",\n        \"line\": 86,\n        \"code\": 400,\n        \"url\": \"http://localhost:8000/api/jobs/019a889a-c063-7279-96d0-143493e9a3b7/apply\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
