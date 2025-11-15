@@ -2,6 +2,7 @@
 
 namespace App\Services\Employer;
 
+use App\Exceptions\BadRequestException;
 use App\Exceptions\NotFoundException;
 use App\Http\Resources\User\Employer\Jobs\JobDetailResource;
 use App\Http\Resources\User\Employer\Jobs\JobListResource;
@@ -101,6 +102,57 @@ class JobsService
     }
 
     /**
+     * Update job
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param string $jobId
+     * @return array
+     */
+    public function updateJob(Request $request, string $jobId): void
+    {
+        if( ! $this->jobListingsRepository->existsById($jobId) ) throw new NotFoundException('Job not found');
+
+        DB::transaction(function () use ($request, $jobId) {
+            $userId = Auth::user()->user_id;
+
+            $dataJob = [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'qualifications' => $request->input('qualification'),
+                'location' => $request->input('location'),
+                'employment_type' => $request->input('employment_type'),
+                'level_experience' => $request->input('level_experience'),
+                'minimum_salary' => $request->input('minimum_salary'),
+                'maximum_salary' => $request->input('maximum_salary'),
+                'user_employer_id' => $userId,
+                'job_category_id' => $request->input('category'),
+            ];
+
+            $this->jobListingsRepository->updatePost($jobId, $dataJob);
+
+            $tags = $request->input('tags');
+            $dataTags = [];
+            $sortTag = 1;
+
+            foreach( $tags as $tag ) {
+                $dataTags[] = [
+                    'id' => Str::orderedUuid(),
+                    'job_listing_id' => $jobId,
+                    'name' => $tag,
+                    'sort' => $sortTag,
+                ];
+
+                $sortTag++;
+            }
+
+            if( ! empty( $dataTags ) ) {
+                $this->jobListingsTagRepository->deleteByJobId($jobId);
+                $this->jobListingsTagRepository->bulkInsert($dataTags);
+            }
+        });
+    }
+
+    /**
      * Get list jobs
      * 
      * @param string $userId
@@ -131,7 +183,33 @@ class JobsService
         if( ! $result ) throw new NotFoundException("Job not found");
 
         $result->list_candidates = $this->appliedJobsRepository->getListAppliedJobsByJobIdAndEmployerId($jobId, $userId);
+        $result->tags = $this->jobListingsTagRepository->getTagsByJobId($jobId);
 
         return new JobDetailResource($result);
+    }
+
+    /**
+     * Update status job
+     * 
+     * @param string $jobId
+     * @param string $status
+     * @return void
+     */
+    public function updateStatusJob(string $jobId, string $status): void
+    {
+        if( ! $this->jobListingsRepository->existsById($jobId) ) throw new NotFoundException('Job not found');
+        
+        $userId = Auth::user()->user_id;
+        $result = $this->jobListingsRepository->getJobDetailWithEmployerIdAndId($userId, $jobId);
+
+        if( ! $result ) throw new NotFoundException("Job not found");
+
+        if( ! in_array($status, ['publish', 'draft']) ) {
+            throw new BadRequestException("Status must be publish or draft");
+        }
+
+        $status = $status == 'publish' ? true : false;
+
+        $this->jobListingsRepository->updateStatusJob($jobId, $userId, $status);
     }
 }

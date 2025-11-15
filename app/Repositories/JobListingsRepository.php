@@ -33,6 +33,18 @@ class JobListingsRepository
     }
 
     /**
+     * Update post
+     * 
+     * @param string $jobId
+     * @param array $data
+     * @return void
+     */
+    public function updatePost(string $jobId, array $data): void
+    {
+        $this->model->where('id', $jobId)->update($data);
+    }
+
+    /**
      * Get list job
      * 
      * @param ?string $title
@@ -60,6 +72,7 @@ class JobListingsRepository
             ->join('user_employer', 'job_listings.user_employer_id', '=', 'user_employer.id')
             ->leftJoin('job_categories', 'job_listings.job_category_id', '=', 'job_categories.id')
             ->when($title, fn($query) => $query->where('job_listings.title', 'LIKE', '%' . $title . '%'))
+            ->where('job_listings.is_publish', true)
             ->get();
     }
 
@@ -133,9 +146,9 @@ class JobListingsRepository
      * Get job detail by id
      * 
      * @param string $jobId
-     * @return JobListings
+     * @return JobListings|null
      */
-    public function getJobDetailById(string $jobId): JobListings
+    public function getJobDetailById(string $jobId): ?JobListings
     {
         return $this->model
             ->select([
@@ -173,5 +186,21 @@ class JobListingsRepository
     public function existsById(string $jobId): bool
     {
         return $this->model->select('id')->where('id', $jobId)->exists();
+    }
+
+    /**
+     * Update job status
+     * 
+     * @param string $jobId
+     * @param string $userId
+     * @param bool $status
+     * @return void
+     */
+    public function updateStatusJob(string $jobId, string $userId, bool $status): void
+    {
+        $this->model
+            ->where('id', $jobId)
+            ->where('user_employer_id', $userId)
+            ->update(['is_publish' => $status]);
     }
 }

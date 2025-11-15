@@ -37,6 +37,7 @@ class JobDetailResource extends JsonResource
         if( $routeName == 'api.jobs.detail' ) {
             $data['company'] = $this->company_name;
             $data['total_applied'] = $this->total_applied_jobs;
+            $data['tags'] = $this->tags;
         }
 
         return $data;

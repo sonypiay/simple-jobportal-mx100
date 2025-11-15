@@ -8,8 +8,8 @@ use App\Http\Resources\Jobs\JobDetailResource;
 use App\Http\Resources\Jobs\JobListResource;
 use App\Repositories\AppliedJobsRepository;
 use App\Repositories\JobListingsRepository;
+use App\Repositories\JobListingsTagRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class JobsService
 {
@@ -22,18 +22,26 @@ class JobsService
      * @var AppliedJobsRepository
      */
     protected AppliedJobsRepository $appliedJobsRepository;
+
+    /**
+     * @var JobListingsTagRepository
+     */
+    protected JobListingsTagRepository $jobListingsTagRepository;
     
     /**
      * @param JobListingsRepository $jobListingsRepository
      * @param AppliedJobsRepository $appliedJobsRepository
+     * @param JobListingsTagRepository $jobListingsTagRepository
      */
     public function __construct(
         JobListingsRepository $jobListingsRepository,
-        AppliedJobsRepository $appliedJobsRepository
+        AppliedJobsRepository $appliedJobsRepository,
+        JobListingsTagRepository $jobListingsTagRepository
     )
     {
         $this->jobListingsRepository = $jobListingsRepository;
         $this->appliedJobsRepository = $appliedJobsRepository;
+        $this->jobListingsTagRepository = $jobListingsTagRepository;
     }
 
     /**
@@ -63,6 +71,8 @@ class JobsService
         $result = $this->jobListingsRepository->getJobDetailById($jobId);
 
         if( ! $result ) throw new NotFoundException("Job not found");
+
+        $result->tags = $this->jobListingsTagRepository->getTagsByJobId($jobId);
 
         return new JobDetailResource($result);
     }

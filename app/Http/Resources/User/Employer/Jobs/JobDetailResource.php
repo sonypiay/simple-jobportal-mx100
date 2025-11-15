@@ -33,6 +33,7 @@ class JobDetailResource extends JsonResource
             'company' => $this->company_name,
             'total_applied' => $this->total_applied_jobs,
             'list_candidates' => AppliedJobsListResource::collection($this->list_candidates),
+            'tags' => $this->tags,
         ];
     }
 }
