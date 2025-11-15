@@ -7,7 +7,7 @@
 -- 
 -- Host: 127.0.0.1 (PostgreSQL 16.10)
 -- Database: public
--- Generation time: 2025-11-16T02:19:04+07:00
+-- Generation time: 2025-11-16T02:31:53+07:00
 -- ************************************************************
 
 
@@ -128,12 +128,8 @@ INSERT INTO "public"."user_employer" ("id", "name", "email", "password", "addres
 -- Dump of table user_session
 -- ------------------------------------------------------------
 
-INSERT INTO "public"."user_session" ("session_id", "api_token", "user_id", "user_type", "created_at", "updated_at") VALUES ('019a840f-912b-7311-8c29-0b18b222575f', 'X7PEyA3NqwhLfspM7UhIjTY4h5AUzBqGMwo5wiXVoq7pYblH7vYNCCAHdkzYqkc9Rqz5qiCwTmM2vi8sgDYO1GrC9T2mY2FcItYi3wiURibkON1wYKtQ0rtmaUoGZk4s', '019a82ce-4f24-72bf-8cb7-9db99ccb41f4', 'candidate', '2025-11-14 20:30:04', '2025-11-14 20:30:04');
-INSERT INTO "public"."user_session" ("session_id", "api_token", "user_id", "user_type", "created_at", "updated_at") VALUES ('019a8410-d308-7131-b9ad-a1a6710848bd', 'PpNCHDNPl3Bc3lu4Ci6dFUT2Y4Jp8Nq2JxEtfzXagmjSjeHGpGFiQP3NaTavVFr7DdpT3hC6ShQ9K8hYiLAPsXCW8U7bH59JUc2x0AhandHjEayAe0WEYWDDZ09hLIuu', '019a82d1-a17b-72e1-946d-c329faaf15f0', 'employer', '2025-11-14 20:31:26', '2025-11-14 20:31:26');
-INSERT INTO "public"."user_session" ("session_id", "api_token", "user_id", "user_type", "created_at", "updated_at") VALUES ('019a8895-7acd-707e-a074-8f27b96aa4ab', 'FOAYXi86rAxV7Aq9z5CyNLeIHZzx4BJGnu2SWKmswJ1HJoB8hB6VSlRUKr4CMvqso0HWpm1RYKrYFnRgVJGD1SoD0gzzU4xo5UrvKIQfCTKriQpnX6AQenQcW0GFxvQw', '019a82ce-4f24-72bf-8cb7-9db99ccb41f4', 'candidate', '2025-11-15 17:34:49', '2025-11-15 17:34:49');
-INSERT INTO "public"."user_session" ("session_id", "api_token", "user_id", "user_type", "created_at", "updated_at") VALUES ('019a8899-4942-7094-8528-d48a68f23c34', 'OJXoj7hIIl3ZIcObz9bBa51WbggjZUIUyc7Oj8Qqy2UG8GOx5iHUXhtwhllEzqtcKUldecux9Y8w3ZiYVRC5IuReUzezvmCvJ01aI6my7Q4LMuCmeGnsiT730Q7TDpDw', '019a82d1-a17b-72e1-946d-c329faaf15f0', 'employer', '2025-11-15 17:38:58', '2025-11-15 17:38:58');
 
 
 
 
--- Dump completed on 2025-11-16T02:19:05+07:00
+-- Dump completed on 2025-11-16T02:31:54+07:00
